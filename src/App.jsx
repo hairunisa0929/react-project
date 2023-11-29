@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <UserGreeting />
+      {/* <UserGreeting userName={name} /> */}
       <GuestGreeting userName={name} getRole={onClickButton} />
     </>
   );

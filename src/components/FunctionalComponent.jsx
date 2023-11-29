@@ -7,14 +7,14 @@ function GuestGreeting(props) {
   return (
     <div>
       <h1>Hello {props.userName}</h1>
-      <button onClick={() => props.getRole(role)}>Get Role</button>
+      {/* <button onClick={() => props.getRole(role)}>Get Role</button> */}
 
-      {/* <Button
+      <Button
         onClick={() => props.getRole(role)}
         style={{ backgroundColor: "blue", color: "white" }}
       >
         Get Role
-      </Button> */}
+      </Button>
     </div>
   );
 }
