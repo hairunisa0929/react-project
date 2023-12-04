@@ -1,66 +1,42 @@
+import { useState } from "react";
+import Card from "./components/Card";
+import Counter from "./components/Counter";
+import User from "./components/User";
+import TodoList from "./components/ToDoList";
+import Places from "./components/Places";
+
+const places = [
+  {
+    id: 1,
+    name: "Beach",
+    city: "Lombok",
+    description:
+      "a landform alongside a body of water which consists of loose particles. ",
+    img: "https://www.novo-monde.com/app/uploads/2023/03/pink-beach-lombok-1024x680.jpg",
+    price: 50000,
+  },
+  {
+    id: 2,
+    name: "Mountain",
+    city: "Dieng",
+    description:
+      "elevated portion of the Earth's crust, generally with steep sides that show significant exposed bedrock.",
+    img: "https://tanijiwo.com/wp-content/uploads/2018/06/Sunrise-Mount-Prau-by-Ade-Chrisnadhi-1280x853.jpg",
+    price: 60000,
+  },
+];
+
 function App() {
-  const name = "Pikachu";
-  const imgUrl =
-    "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/025.png";
-
-  // return (
-  //   <div>
-  //     {/* curly braces as text */}
-  //     <p>Hello, my name is {name}</p>
-
-  //     {/* curly braces as attribute */}
-  //     <img src={imgUrl} alt="foto" />
-  //   </div>
-  // );
-
-  // conditional rendering
-  const isLoggedIn = false;
-
-  // if else
-  // if (isLoggedIn) {
-  //   return <h1 className="text-2xl font-bold">Hello {name}!</h1>;
-  // }
-
-  // return <h1 className="text-2xl font-bold">Please login</h1>;
-
-  // ternary and logical operator
-  const messages = [
-    {
-      id: 1,
-      subject: "Hello World",
-    },
-    {
-      id: 2,
-      subject: "Good bye world",
-    },
-    {
-      id: 3,
-      subject: "What's up, world?",
-    },
-  ];
-
   return (
-    <>
-      {/* ternary */}
-      {isLoggedIn ? (
-        <h1 className="text-2xl font-bold">Hello {name}!</h1>
-      ) : (
-        <h1 className="text-2xl font-bold">Please login</h1>
-      )}
+    <div className="p-8">
+      {/* <Places places={places} /> */}
 
-      {/* logical operator */}
-      {messages.length > 0 && (
-        <>
-          <h2 className="mb-2 font-bold">
-            You have {messages.length} unread messages.
-          </h2>
+      {/* <Counter /> */}
 
-          {messages.map((message) => (
-            <p>{message.subject}</p>
-          ))}
-        </>
-      )}
-    </>
+      {/* <User /> */}
+
+      <TodoList />
+    </div>
   );
 }
 
