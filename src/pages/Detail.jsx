@@ -11,10 +11,12 @@ function Detail() {
   // console.log(searchParams.get("name"));
 
   // get data with useLocation (state not showed in url)
-  const location = useLocation();
-  console.log("location", location.state.name);
+  // const location = useLocation();
+  // console.log("location", location.state.name);
 
-  return <div>Detail</div>;
+  return (
+    <div>Detail</div>
+  );
 }
 
 export default Detail;

@@ -8,9 +8,9 @@ function App() {
     <Layout>
       <Routes>
         {/* navigate for redirecting */}
-        <Route path="/" element={<Navigate to="/home" />} />
+        {/* <Route path="/" element={<Navigate to="/home" />} /> */}
         <Route path="/home" element={<Home />} />
-        <Route path="detail/:id" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail />} />
       </Routes>
     </Layout>
   );

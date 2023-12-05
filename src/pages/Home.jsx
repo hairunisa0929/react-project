@@ -6,9 +6,9 @@ import { createSearchParams } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
 
-  // const onClickCard = (id) => {
-  //   navigate(`/detail/${id}`);
-  // };
+  const onClickCard = (id) => {
+    navigate(`/detail/${id}`);
+  };
 
   // passing data with search params
   // const onClickCard = (id, name) => {
@@ -21,13 +21,13 @@ function Home() {
   // };
 
   // passing data with state
-  const onClickCard = (id, name) => {
-    navigate(`/detail/${id}`, {
-      state: {
-        name: name,
-      },
-    });
-  };
+  // const onClickCard = (id, name) => {
+  //   navigate(`/detail/${id}`, {
+  //     state: {
+  //       name: name,
+  //     },
+  //   });
+  // };
 
   return (
     <section className="flex flex-col justify-cente mt-8 p-8">
