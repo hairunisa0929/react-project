@@ -1,27 +1,14 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { BeatLoader } from "react-spinners";
 import Card from "../components/Card";
 import useSWR from "swr";
 
-function Home() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+function HomeWithSWR() {
   const navigate = useNavigate();
 
   const onClickCard = (id) => {
     navigate(`/detail/${id}`);
-  };
-
-  // get data
-  const onClickGetData = () => {
-    fetch("http://localhost:3000/pokemon")
-      .then((res) => res.json())
-      .then((json) => {
-        setData(json);
-      })
-      .catch((error) => console.log(error));
   };
 
   // add new data
@@ -34,59 +21,37 @@ function Home() {
       img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
     };
 
-    // fetch("http://localhost:3000/pokemon", {
-    //   method: "POST",
-    //   body: JSON.stringify(payload),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // }).then(() => alert("New pokemon added!"));
-
     axios
       .post("http://localhost:3000/pokemon", payload)
       .then(() => {
-        console.log("New pokemon added!")
-        fetchData();
+        console.log("New pokemon added!");
+        mutate();
       })
       .catch((error) => console.log(error));
   };
-  // const getPokemon = (url) => axios.get(url).then((response) => response.data);
 
-  // const { data, isLoading, error, mutate } = useSWR(
-  //   "http://localhost:3000/pokemon",
-  //   getPokemon,
-  //   {
-  //     onSuccess: (data) => data.sort((a, b) => a.name.localeCompare(b.name)),
-  //   }
-  // );
+  //   use react swr to fetch data
+  const getPokemon = (url) => axios.get(url).then((response) => response.data);
 
-  // if (error) return alert(JSON.stringify(error));
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get("http://localhost:3000/pokemon");
-      console.log(response)
-      setData(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
+  const { data, isLoading, error, mutate } = useSWR(
+    "http://localhost:3000/pokemon",
+    getPokemon,
+    {
+      onSuccess: (data) => data.sort((a, b) => a.name.localeCompare(b.name)),
     }
-  };
+  );
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  if (error) return alert(JSON.stringify(error));
 
   return (
     <section className="flex flex-col justify-center">
       <div className="flex justify-center gap-4">
-        <button
+        {/* <button
           className="rounded-lg bg-sky-400 p-2 text-white self-center"
           onClick={onClickGetData}
         >
           Get Data
-        </button>
+        </button> */}
 
         <button
           className="rounded-lg bg-sky-400 p-2 text-white self-center"
@@ -97,7 +62,7 @@ function Home() {
       </div>
 
       <div className="flex justify-center gap-4 mt-8">
-        {loading ? (
+        {isLoading ? (
           <BeatLoader color="#38BDF8" />
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -116,4 +81,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeWithSWR;
