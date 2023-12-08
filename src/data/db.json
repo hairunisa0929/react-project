@@ -39,5 +39,15 @@
       "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
       "id": 5
     }
+  ],
+  "booking": [
+    {
+      "customerName": "icha",
+      "customerEmail": "icha@mail.com",
+      "customerCity": "Bandung",
+      "delivery": "regular",
+      "wrap": false,
+      "id": 1
+    }
   ]
 }
