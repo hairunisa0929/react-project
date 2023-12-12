@@ -1,17 +1,15 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { CheckoutContext } from "../context/CheckoutContext";
 import { toRupiah } from "../utils/formatter";
 import { useNavigate } from "react-router";
 
 function Checkout() {
-  const { dataCheckout } = useContext(CheckoutContext);
-  console.log(dataCheckout);
-
   const navigate = useNavigate();
+  const { dataCheckout } = useSelector((state) => state.checkout);
 
   const schema = yup.object().shape({
     name: yup.string("Field Name is required"),

@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import useSWR from "swr";
-import { CheckoutContext } from "../context/CheckoutContext";
+import { checkoutBooking } from "../store/actions/checkoutAction";
 import { toRupiah } from "../utils/formatter";
 
 const fetcher = (url) => axios.get(url).then((response) => response.data);
@@ -11,7 +12,7 @@ const fetcher = (url) => axios.get(url).then((response) => response.data);
 function Detail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { setDataCheckout } = useContext(CheckoutContext);
+  const dispatch = useDispatch();
 
   const [qty, setQty] = useState(1);
 
@@ -30,10 +31,12 @@ function Detail() {
   };
 
   const onClickBuyNow = () => {
-    setDataCheckout({
+    const payload = {
       ...data,
       qty,
-    });
+    };
+    
+    dispatch(checkoutBooking(payload));
     navigate("/checkout");
   };
 
