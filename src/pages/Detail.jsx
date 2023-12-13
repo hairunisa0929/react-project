@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import useSWR from "swr";
-import { checkoutBooking } from "../store/actions/checkoutAction";
+import { checkoutBooking } from "../store/reducers/checkoutSlice";
 import { toRupiah } from "../utils/formatter";
 
 const fetcher = (url) => axios.get(url).then((response) => response.data);
@@ -35,7 +35,7 @@ function Detail() {
       ...data,
       qty,
     };
-    
+
     dispatch(checkoutBooking(payload));
     navigate("/checkout");
   };
