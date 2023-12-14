@@ -45,5 +45,21 @@
       "qty": 3,
       "id": 1
     }
+  ],
+  "users": [
+    {
+      "email": "admin@mail.com",
+      "password": "$2a$10$xhuXbqe0XJmpC.TEDWtOSuJCxtWQ/0IsjOvy.XYdVYwYHBHNJtv7G",
+      "name": "Admin",
+      "role": "admin",
+      "id": 1
+    },
+    {
+      "email": "user1@mail.com",
+      "password": "$2a$10$0JkY2b.JF2TKtloclczLpeSYN3jPB9zaLu4RPjOMMV0/2KgzR3dom",
+      "name": "User 1",
+      "role": "user",
+      "id": 2
+    }
   ]
 }

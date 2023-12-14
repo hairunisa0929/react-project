@@ -34,7 +34,7 @@ function Home() {
   const getPokemon = (url) => axios.get(url).then((response) => response.data);
 
   const { data, isLoading, error, mutate } = useSWR(
-    "http://localhost:3000/pokemon",
+    "http://localhost:3000/660/pokemon",
     getPokemon,
     {
       onSuccess: (data) => data.sort((a, b) => a.name.localeCompare(b.name)),
