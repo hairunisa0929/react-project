@@ -6,6 +6,7 @@ import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import PrivateRoutes from "./components/route/PrivateRoutes";
 import GuestRoutes from "./components/route/GuestRoutes";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Layout>
   );

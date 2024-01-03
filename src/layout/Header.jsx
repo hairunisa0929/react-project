@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { GrCart } from "react-icons/gr";
 import Logo from "../assets/images/pokemon-logo.png";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -27,20 +28,28 @@ function Header() {
       <Link to="/">
         <img src={Logo} alt="logo" className="w-[100px]" />
       </Link>
+
       {isLoggedIn && (
-        <div
-          className="self-center cursor-pointer"
-          onClick={() => setShowDropdown(!showDropdown)}
-        >
-          Hi, {user.name}
-          {showDropdown && (
-            <div
-              className="rounded-lg drop-shadow-md absolute bg-white p-3"
-              onClick={onClickLogout}
-            >
-              Logout
-            </div>
-          )}
+        <div className="flex gap-4">
+          <GrCart
+            className="self-center cursor-pointer"
+            onClick={() => navigate("/cart")}
+          />
+
+          <div
+            className="self-center cursor-pointer"
+            onClick={() => setShowDropdown(!showDropdown)}
+          >
+            Hi, {user.name}
+            {showDropdown && (
+              <div
+                className="rounded-lg drop-shadow-md absolute bg-white p-3"
+                onClick={onClickLogout}
+              >
+                Logout
+              </div>
+            )}
+          </div>
         </div>
       )}
     </header>

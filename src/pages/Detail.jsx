@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import useSWR from "swr";
 import { checkoutBooking } from "../store/reducers/checkoutSlice";
+import { addItem } from "../store/reducers/cartSlice";
 import { toRupiah } from "../utils/formatter";
 
 const fetcher = (url) => axios.get(url).then((response) => response.data);
@@ -40,6 +41,8 @@ function Detail() {
     navigate("/checkout");
   };
 
+  const onClickCart = () => dispatch(addItem({ ...data, quantity: qty }));
+  
   return (
     <section>
       <div className="flex">
@@ -78,12 +81,20 @@ function Detail() {
             </button>
           </div>
 
-          <button
-            className="rounded-lg bg-sky-400 p-2 text-white w-fit"
-            onClick={onClickBuyNow}
-          >
-            Buy Now
-          </button>
+          <div className="flex gap-4">
+            <button
+              className="rounded-lg bg-sky-400 p-2 text-white w-fit"
+              onClick={onClickBuyNow}
+            >
+              Buy Now
+            </button>
+            <button
+              className="rounded-lg bg-white p-2 text-sky-400 border-[1px] border-sky-400 w-fit"
+              onClick={onClickCart}
+            >
+              Add To Cart
+            </button>
+          </div>
         </div>
       </div>
     </section>
