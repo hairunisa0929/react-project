@@ -11,7 +11,7 @@ function CartItem({
   handleRemoveCartItem,
 }) {
   return (
-    <div className="flex gap-4 p-4 rounded-lg bg-gray-100">
+    <div className="flex gap-4 p-4 rounded-lg bg-gray-100 w-1/3">
       <div className="rounded-lg w-16 h-16">
         <img
           src={img}
@@ -19,22 +19,23 @@ function CartItem({
         />
       </div>
 
-      <div>
+      <div className="w-full">
         <div className="flex justify-between">
-          <h3 className="font-bold text-sm">{name}</h3>
+          <h3 className="font-bold">{name}</h3>
           <BiTrash
-            className="self-center text-primary cursor-pointer"
+            className="self-center text-sky-400 cursor-pointer"
             onClick={handleRemoveCartItem}
           />
         </div>
+
         <div className="flex justify-between mt-4">
-          <span className="font-bold text-primary text-sm">
+          <span className="font-bold text-sky-400">
             {toRupiah(price)}
           </span>
           <div className="flex self-center justify-between gap-3">
             <button
               className={`${
-                qty === 1 ? "bg-blue-300" : "bg-primary"
+                qty === 1 ? "bg-blue-300" : "bg-sky-400"
               } h-full w-5 rounded text-sm text-white`}
               disabled={qty === 1}
               onClick={handleDecrement}
@@ -43,7 +44,7 @@ function CartItem({
             </button>
             <span className="text-gray-500 text-sm">{qty}</span>
             <button
-              className="bg-primary h-full w-5 rounded text-sm text-white"
+              className="bg-sky-400 h-full w-5 rounded text-sm text-white"
               onClick={handleIncrement}
             >
               +

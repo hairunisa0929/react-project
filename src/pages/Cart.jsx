@@ -19,19 +19,23 @@ function Cart() {
   };
 
   return (
-    <section>
-      {cartItems.map((item) => (
-        <CartItem
-          key={item.id}
-          name={item.name}
-          price={item.price}
-          qty={item.quantity}
-          img={item.img}
-          handleIncrement={() => handleIncrement(item.id)}
-          handleDecrement={() => handleDecrement(item.id)}
-          handleRemoveCartItem={() => handleRemoveCartItem(item.id)}
-        />
-      ))}
+    <section className="flex flex-col p-8 w-full">
+      <h1 className="mb-4 font-bold text-xl text-center">Cart</h1>
+
+      <div className="flex flex-col gap-4 w-full items-center">
+        {cartItems.map((item) => (
+          <CartItem
+            key={item.id}
+            name={item.name}
+            price={item.price}
+            qty={item.quantity}
+            img={item.img}
+            handleIncrement={() => handleIncrement(item.id)}
+            handleDecrement={() => handleDecrement(item.id)}
+            handleRemoveCartItem={() => handleRemoveCartItem(item.id)}
+          />
+        ))}
+      </div>
     </section>
   );
 }
