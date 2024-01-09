@@ -13,6 +13,11 @@ function Header() {
   const [showDropdown, setShowDropdown] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const isLoggedIn = useSelector((state) => state.auth.token !== "");
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const cartTotalQty = cartItems
+    .map((item) => item.quantity)
+    .reduce((prevValue, currValue) => prevValue + currValue, 0);
 
   const onClickLogout = () => {
     dispatch(resetAuthData());
@@ -31,13 +36,16 @@ function Header() {
 
       {isLoggedIn && (
         <div className="flex gap-4">
-          <GrCart
-            className="self-center cursor-pointer"
-            onClick={() => navigate("/cart")}
-          />
+          <div className="relative self-center cursor-pointer">
+            <GrCart className="text-2xl" onClick={() => navigate("/cart")} />
+
+            <span className="absolute px-2 py-[1px] left-3 top-0 bg-red-300 text-white rounded-full text-xs">
+              {cartTotalQty}
+            </span>
+          </div>
 
           <div
-            className="self-center cursor-pointer"
+            className="self-center cursor-pointer text-lg"
             onClick={() => setShowDropdown(!showDropdown)}
           >
             Hi, {user.name}
