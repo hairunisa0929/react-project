@@ -1,7 +1,7 @@
 import { useNavigate, Outlet } from "react-router";
 import { pokemon as data } from "../data/pokemon";
 import Card from "../components/Card";
-import { createSearchParams } from "react-router-dom";
+import { Link, createSearchParams } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
@@ -31,17 +31,19 @@ function Home() {
 
   return (
     <section className="flex flex-col justify-cente mt-8 p-8">
+      {/* <Outlet /> */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {data?.map(({ id, name, img }) => (
-          <Card
-            title={name}
-            image={img}
-            key={id}
-            onClick={() => onClickCard(id, name)}
-          />
+          // <Link to={`/detail/${id}`} key={id}>
+            <Card
+              title={name}
+              image={img}
+              key={id}
+              onClick={() => onClickCard(id, name)}
+            />
+          // </Link>
         ))}
       </div>
-      {/* <Outlet /> */}
     </section>
   );
 }

@@ -44,4 +44,112 @@ export const pokemon = [
     price: 120000,
     id: 5,
   },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 6,
+  },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 7,
+  },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 8,
+  },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 9,
+  },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 10,
+  },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 11,
+  },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 12,
+  },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 13,
+  },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 14,
+  },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 15,
+  },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 16,
+  },
+  {
+    name: "Hypno",
+    type: "Psychic",
+    description:
+      "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+    price: 120000,
+    id: 17,
+  },
 ];
