@@ -7,6 +7,10 @@ function CheckoutPage() {
   const schema = yup.object().shape({
     name: yup.string().required("Field Name is required"),
     email: yup.string().email().required("Email is required"),
+    city: yup
+      .string()
+      .oneOf(["Jakarta", "Bandung"])
+      .required("City is required"),
   });
 
   const {
@@ -29,13 +33,13 @@ function CheckoutPage() {
       wrap: data.wrap,
     };
 
-    axios
-      .post("http://localhost:3000/booking", payload)
-      .then(() => {
-        alert("Successfully made a new booking!");
-        reset();
-      })
-      .catch((error) => console.log(error));
+    // axios
+    //   .post("http://localhost:3000/booking", payload)
+    //   .then(() => {
+    //     alert("Successfully made a new booking!");
+    //     reset();
+    //   })
+    //   .catch((error) => console.log(error));
   };
 
   return (
@@ -83,6 +87,7 @@ function CheckoutPage() {
                 <option value="Jakarta">Jakarta</option>
                 <option value="Bandung">Bandung</option>
               </select>
+              <p className="error">{errors.city?.message}</p>
             </div>
 
             <div className="flex gap-8">

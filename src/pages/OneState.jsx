@@ -7,7 +7,7 @@ function OneState() {
     email: "",
     city: "Jakarta",
     delivery: "regular",
-    wrap: false,
+    wrap: true,
   });
 
   const onChangeForm = (e) => {
@@ -17,11 +17,11 @@ function OneState() {
     });
   };
 
-  console.log(formData);
+  // console.log(formData);
 
   const onSubmitForm = (e) => {
     e.preventDefault();
-    
+    console.log(formData)
   };
 
 
