@@ -1,80 +1,69 @@
-function Form({register, handleSubmit, onSubmitForm}) {
+import { IoCloseOutline } from "react-icons/io5";
+
+function Form({
+  title,
+  handleSubmit,
+  register,
+  onSubmitForm,
+  errors,
+  handleClose,
+}) {
   return (
-    <form
-      className="flex flex-col gap-4 mt-4"
-      onSubmit={handleSubmit(onSubmitForm)}
-    >
-      <div>
-        <label htmlFor="name">Name</label>
-        <input
-          placeholder="Name"
-          className="w-full rounded-lg border-[1px] border-gray-200 p-4 pe-12 text-sm focus:outline-sky-200"
-          {...register("name")}
-          id="name"
-        />
-        {/* <p className="error">{errors.name?.message}</p> */}
-      </div>
-
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          placeholder="Email"
-          className="w-full rounded-lg border-[1px] border-gray-200 p-4 pe-12 text-sm focus:outline-sky-200"
-          {...register("email")}
-          id="email"
-        />
-        {/* <p className="error">{errors.email?.message}</p> */}
-      </div>
-
-      <div>
-        <label htmlFor="city">City</label>
-        <select
-          placeholder="City"
-          className="p-4 pe-12 w-full rounded-lg border-[1px] border-gray-300 text-gray-700 sm:text-sm"
-          {...register("city")}
-          id="city"
+    <div className="fixed flex justify-center items-center inset-0 bg-black bg-opacity-25 backdrop-blur-sm">
+      <div className="h-fit w-fit p-4 rounded-lg bg-white shadow-md">
+        <form
+          className="flex flex-col gap-4 mt-4"
+          onSubmit={handleSubmit(onSubmitForm)}
         >
-          <option value="">Please select</option>
-          <option value="Jakarta">Jakarta</option>
-          <option value="Bandung">Bandung</option>
-        </select>
-        {/* <p className="error">{errors.city?.message}</p> */}
+          <div className="flex justify-between">
+            <h2 className="font-bold text-lg">{title}</h2>
+            <IoCloseOutline
+              className="text-lg cursor-pointer"
+              onClick={handleClose}
+            />
+          </div>
+          <div>
+            <label htmlFor="name">Name</label>
+            <input
+              placeholder="Name"
+              className="w-full rounded-lg border-[1px] border-gray-200 p-4 pe-12 text-sm focus:outline-sky-200"
+              {...register("name")}
+              id="name"
+            />
+            <p className="error">{errors.name?.message}</p>
+          </div>
+
+          <div>
+            <label htmlFor="price">Price</label>
+            <input
+              placeholder="Price"
+              className="w-full rounded-lg border-[1px] border-gray-200 p-4 pe-12 text-sm focus:outline-sky-200"
+              {...register("price")}
+              id="price"
+            />
+            <p className="error">{errors.price?.message}</p>
+          </div>
+
+          <div>
+            <label htmlFor="img">Image</label>
+            <input
+              placeholder="Image URL"
+              className="w-full rounded-lg border-[1px] border-gray-200 p-4 pe-12 text-sm focus:outline-sky-200"
+              {...register("img")}
+              id="img"
+            />
+            <p className="error">{errors.img?.message}</p>
+          </div>
+
+          <button
+            className="rounded-lg bg-sky-400 p-2 text-white self-center w-full"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
       </div>
-
-      <div className="flex gap-8">
-        <div className="flex gap-2">
-          <input
-            type="radio"
-            id="sameday"
-            {...register("delivery")}
-            value="sameday"
-          />
-          <label htmlFor="sameday">Same Day</label>
-        </div>
-
-        <div className="flex gap-2">
-          <input
-            type="radio"
-            id="regular"
-            {...register("delivery")}
-            value="regular"
-          />
-          <label htmlFor="regular">Regular</label>
-        </div>
-      </div>
-
-      <div className="flex gap-2">
-        <input type="checkbox" {...register("wrap")} id="wrap" />
-        <label htmlFor="wrap">Extra Wrap</label>
-      </div>
-
-      <button
-        className="rounded-lg bg-sky-400 p-2 text-white self-center w-full"
-        type="submit"
-      >
-        Purchase
-      </button>
-    </form>
+    </div>
   );
 }
 

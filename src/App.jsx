@@ -6,6 +6,7 @@ import Layout from "./layout/Layout";
 import ManyStates from "./pages/ManyStates";
 import OneState from "./pages/OneState";
 import HookForm from "./pages/HookForm";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/home" element={<HomeWithSWR />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/checkout" element={<HookForm />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Layout>
   );
