@@ -47,10 +47,11 @@ function Form({
           <div>
             <label htmlFor="img">Image</label>
             <input
-              placeholder="Image URL"
+              // placeholder="Image URL"
               className="w-full rounded-lg border-[1px] border-gray-200 p-4 pe-12 text-sm focus:outline-sky-200"
               {...register("img")}
               id="img"
+              type="file"
             />
             <p className="error">{errors.img?.message}</p>
           </div>

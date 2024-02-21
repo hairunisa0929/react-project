@@ -11,11 +11,12 @@ function Admin() {
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [pokemonId, setPokemonId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const schema = yup.object().shape({
     name: yup.string().required("Name is required"),
     price: yup.string().required("Price is required"),
-    img: yup.string().required("Image is required"),
+    // img: yup.string().required("Image is required"),
   });
 
   const {
@@ -57,29 +58,77 @@ function Admin() {
 
   const onSubmitModal = (data) => {
     console.log(data);
+    console.log(data.img);
 
     if (modalTitle === "Add Item") {
+      const formData = new FormData();
+      formData.append("file", data.img[0]);
+      formData.append("upload_preset", "brachio29");
+
       axios
-        .post("http://localhost:3000/pokemon", data)
-        .then(() => {
-          reset();
-          setShowModal(false);
-          mutate();
-        })
-        .catch((error) => {
-          console.log("Error", error);
+        .post(
+          "https://api.cloudinary.com/v1_1/dwwpsubmg/image/upload",
+          formData
+        )
+        .then((response) => {
+          const payload = {
+            name: data.name,
+            price: data.price,
+            img: response.data.secure_url,
+          };
+
+          axios
+            .post("http://localhost:3000/pokemon", payload)
+            .then(() => {
+              reset();
+              setShowModal(false);
+              mutate();
+            })
+            .catch((error) => {
+              console.log("Error", error);
+            });
         });
     } else {
-      axios
-        .put(`http://localhost:3000/pokemon/${pokemonId}`, data)
-        .then(() => {
-          reset();
-          setShowModal(false);
-          mutate();
-        })
-        .catch((error) => {
-          console.log("Error", error);
-        });
+      if (data.img.length > 0) {
+        const formData = new FormData();
+        formData.append("file", data.img[0]);
+        formData.append("upload_preset", "brachio29");
+
+        axios
+          .post(
+            "https://api.cloudinary.com/v1_1/dwwpsubmg/image/upload",
+            formData
+          )
+          .then((response) => {
+            const payload = {
+              name: data.name,
+              price: data.price,
+              img: response.data.secure_url,
+            };
+
+            axios
+              .put(`http://localhost:3000/pokemon/${pokemonId}`, payload)
+              .then(() => {
+                reset();
+                setShowModal(false);
+                mutate();
+              })
+              .catch((error) => {
+                console.log("Error", error);
+              });
+          });
+      } else {
+        axios
+          .put(`http://localhost:3000/pokemon/${pokemonId}`, data)
+          .then(() => {
+            reset();
+            setShowModal(false);
+            mutate();
+          })
+          .catch((error) => {
+            console.log("Error", error);
+          });
+      }
     }
   };
 

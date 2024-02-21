@@ -20,9 +20,15 @@
     },
     {
       "name": "Hypno",
-      "price": "40000",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+      "price": "900000",
+      "img": "https://res.cloudinary.com/dwwpsubmg/image/upload/v1708396671/edrzhqhebfkb4bfbmxre.png",
       "id": 5
+    },
+    {
+      "name": "Charizard",
+      "price": "500000",
+      "img": "https://res.cloudinary.com/dwwpsubmg/image/upload/v1708361827/apgmg95hg4twuoxvrzms.png",
+      "id": 6
     }
   ],
   "booking": [
