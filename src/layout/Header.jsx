@@ -7,6 +7,7 @@ function Header() {
       <Link to="/home">
         <img src={Logo} alt="logo" className="w-[100px]" />
       </Link>
+      <Link to="/cart">Cart</Link>
     </header>
   );
 }

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import useSWR from "swr";
 import { checkoutBooking } from "../store/actions/checkoutAction";
+import { addToCart } from "../store/actions/cartActions";
 import { toRupiah } from "../utils/formatter";
 
 const fetcher = (url) => axios.get(url).then((response) => response.data);
@@ -35,10 +36,19 @@ function Detail() {
       ...data,
       qty,
     };
-    
+
     dispatch(checkoutBooking(payload));
     navigate("/checkout");
   };
+
+  const onClickAddToCart = () => {
+    const payload = {
+      ...data,
+      qty,
+    };
+
+    dispatch(addToCart(payload));
+  }
 
   return (
     <section>
@@ -65,7 +75,7 @@ function Detail() {
             </button>
             <input
               type="number"
-              className="outline-none focus:outline-none text-center bg-gray-300 w-20 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+              className="outline-none text-center bg-gray-300 w-20 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700"
               name="qty"
               value={qty}
               disabled
@@ -78,12 +88,21 @@ function Detail() {
             </button>
           </div>
 
-          <button
-            className="rounded-lg bg-sky-400 p-2 text-white w-fit"
-            onClick={onClickBuyNow}
-          >
-            Buy Now
-          </button>
+          <div className="flex gap-4">
+            <button
+              className="rounded-lg bg-sky-400 p-2 text-white w-fit"
+              onClick={onClickBuyNow}
+            >
+              Buy Now
+            </button>
+
+            <button
+              className="rounded-lg border border-sky-400 text-sky-400 p-2 w-fit"
+              onClick={onClickAddToCart}
+            >
+              Add To Cart
+            </button>
+          </div>
         </div>
       </div>
     </section>
