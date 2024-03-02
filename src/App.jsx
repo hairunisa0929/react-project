@@ -8,6 +8,7 @@ import PrivateRoutes from "./components/route/PrivateRoutes";
 import GuestRoutes from "./components/route/GuestRoutes";
 import AdminRoutes from "./components/route/AdminRoutes";
 import Admin from "./pages/Admin";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
         </Route>
 
