@@ -29,6 +29,8 @@ function Login() {
       .post("http://localhost:3000/login", data)
       .then((res) => {
         const { accessToken, user } = res.data;
+        // console.log("token", accessToken);
+        // console.log("user", user);
         dispatch(setToken(accessToken));
         dispatch(setUser(user));
         navigate("/");

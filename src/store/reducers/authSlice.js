@@ -41,10 +41,12 @@ const authSlice = createSlice({
     },
     setUser(state, action) {
       const { id, email, name, role } = action.payload;
+     
       state.user.id = id;
       state.user.email = email;
       state.user.name = name;
       state.user.role = role;
+      // console.log(state.user);
       localStorage.setItem("user", JSON.stringify({ id, email, name, role }));
     },
     resetAuthData() {

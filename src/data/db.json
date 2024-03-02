@@ -60,6 +60,13 @@
       "name": "User 1",
       "role": "user",
       "id": 2
+    },
+    {
+      "email": "user2@mail.com",
+      "password": "$2a$10$AJ6VQoBqdZ4qVofq.a/h/ecPa4HxSKs/ymZGj.rv2Is7pp1eGMhCi",
+      "name": "User 2",
+      "role": "user",
+      "id": 3
     }
   ]
 }
