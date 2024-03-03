@@ -68,5 +68,23 @@
       "role": "user",
       "id": 3
     }
+  ],
+  "cart": [
+    {
+      "pokemonId": 2,
+      "name": "Pikachu",
+      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",
+      "price": 150000,
+      "qty": 10,
+      "id": 1
+    },
+    {
+      "pokemonId": 3,
+      "name": "Poliwag",
+      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/060.png",
+      "price": 100000,
+      "qty": 3,
+      "id": 2
+    }
   ]
 }

@@ -53,7 +53,7 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       // set header global
-      // delete axios.defaults.headers.common["Authorization"];
+      delete axios.defaults.headers.common["Authorization"];
       return { ...initialState };
     },
   },

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import useSWR from "swr";
 import { checkoutBooking } from "../store/reducers/checkoutSlice";
 import { toRupiah } from "../utils/formatter";
+import { addToCart } from "../store/reducers/cartSlice";
 
 const fetcher = (url) => axios.get(url).then((response) => response.data);
 
@@ -15,6 +16,8 @@ function Detail() {
   const dispatch = useDispatch();
 
   const [qty, setQty] = useState(1);
+
+  const { dataCart } = useSelector((state) => state.cart);
 
   const { data, isLoading } = useSWR(
     `http://localhost:3000/pokemon/${id}`,
@@ -38,6 +41,37 @@ function Detail() {
 
     dispatch(checkoutBooking(payload));
     navigate("/checkout");
+  };
+
+  const onClickAddToCart = async () => {
+    const foundItem = dataCart.find((item) => item.pokemonId === parseInt(id));
+    // console.log(dataCart);
+    if (foundItem) {
+      console.log("masuk edit")
+      const payload = {
+        ...foundItem,
+        qty: foundItem.qty + qty,
+      };
+      await axios
+        .put(`http://localhost:3000/cart/${foundItem.id}`, payload)
+        .then((res) => {
+          dispatch(addToCart(res.data));
+        });
+    } else {
+      console.log("masuk add")
+      const payload = {
+        pokemonId: data.id,
+        name: data.name,
+        img: data.img,
+        price: data.price,
+        qty,
+      };
+      await axios.post("http://localhost:3000/cart", payload).then((res) => {
+        dispatch(addToCart(res.data));
+      });
+    }
+
+    // navigate("/cart");
   };
 
   return (
@@ -88,7 +122,7 @@ function Detail() {
 
             <button
               className="rounded-lg border border-sky-400 text-sky-400 p-2 w-fit"
-              // onClick={onClickAddToCart}
+              onClick={onClickAddToCart}
             >
               Add To Cart
             </button>
