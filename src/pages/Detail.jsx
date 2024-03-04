@@ -18,6 +18,7 @@ function Detail() {
   const [qty, setQty] = useState(1);
 
   const { dataCart } = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.auth.user);
 
   const { data, isLoading } = useSWR(
     `http://localhost:3000/pokemon/${id}`,
@@ -43,30 +44,33 @@ function Detail() {
     navigate("/checkout");
   };
 
-  const onClickAddToCart = async () => {
-    const foundItem = dataCart.find((item) => item.pokemonId === parseInt(id));
+  const onClickAddToCart = () => {
+    const foundItem = dataCart.find(
+      (item) => item.pokemonId === parseInt(id) && item.userId === user.id
+    );
     // console.log(dataCart);
     if (foundItem) {
-      console.log("masuk edit")
+      console.log("masuk edit");
       const payload = {
         ...foundItem,
         qty: foundItem.qty + qty,
       };
-      await axios
+      axios
         .put(`http://localhost:3000/cart/${foundItem.id}`, payload)
         .then((res) => {
           dispatch(addToCart(res.data));
         });
     } else {
-      console.log("masuk add")
+      console.log("masuk add");
       const payload = {
+        userId: user.id,
         pokemonId: data.id,
         name: data.name,
         img: data.img,
         price: data.price,
         qty,
       };
-      await axios.post("http://localhost:3000/cart", payload).then((res) => {
+      axios.post("http://localhost:3000/cart", payload).then((res) => {
         dispatch(addToCart(res.data));
       });
     }

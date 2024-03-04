@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Logo from "../assets/images/pokemon-logo.png";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { resetAuthData } from "../store/reducers/authSlice";
-import useSWR from "swr";
-import { addToCart } from "../store/reducers/cartSlice";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { BiCartAlt } from "react-icons/bi";
+import Logo from "../assets/images/pokemon-logo.png";
+import { resetAuthData } from "../store/reducers/authSlice";
+import { addToCart } from "../store/reducers/cartSlice";
 
 function Header() {
   const dispatch = useDispatch();
@@ -16,13 +14,20 @@ function Header() {
   const user = useSelector((state) => state.auth.user);
   const isLoggedIn = useSelector((state) => state.auth.token !== "");
 
+  const { dataCart } = useSelector((state) => state.cart);
+
+  const cartTotalPrice = dataCart
+    .filter((item) => item.userId === user.id)
+    .map((item) => item.qty)
+    .reduce((prevValue, currValue) => prevValue + currValue, 0);
+
   const onClickLogout = () => {
     dispatch(resetAuthData());
     navigate("/login");
   };
 
-  const fetchData = async () => {
-    await axios.get("http://localhost:3000/cart").then((res) => {
+  const fetchData = () => {
+    axios.get("http://localhost:3000/cart").then((res) => {
       res.data.forEach((item) => {
         dispatch(addToCart(item));
       });
@@ -30,8 +35,10 @@ function Header() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (isLoggedIn) {
+      fetchData();
+    }
+  }, [isLoggedIn]);
 
   return (
     <header
@@ -43,12 +50,17 @@ function Header() {
         <img src={Logo} alt="logo" className="w-[100px]" />
       </Link>
 
-      <div className="flex self-center gap-4">
-        <Link to="/cart">Cart</Link>
+      {isLoggedIn && (
+        <div className="flex self-center gap-4">
+          <Link to="/cart" className="relative">
+            <BiCartAlt className="text-3xl" />
+            <div className="absolute top-0 left-4 bg-red-400 px-2 rounded-lg text-white text-xs">
+              {cartTotalPrice > 0 && cartTotalPrice}
+            </div>
+          </Link>
 
-        {isLoggedIn && (
           <div
-            className="cursor-pointer"
+            className="cursor-pointer text-lg"
             onClick={() => setShowDropdown(!showDropdown)}
           >
             Hi, {user.name}
@@ -61,8 +73,8 @@ function Header() {
               </div>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   );
 }

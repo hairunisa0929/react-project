@@ -1,69 +1,68 @@
-import { useDispatch, useSelector } from "react-redux";
-import { toRupiah } from "../utils/formatter";
-import { decrementQty, incrementQty } from "../store/reducers/cartSlice";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { TiTrash } from "react-icons/ti";
+import { toRupiah } from "../utils/formatter";
+import {
+  decrementQty,
+  incrementQty,
+  removeItem,
+} from "../store/reducers/cartSlice";
+import CartItem from "../components/CartItem";
 
 function Cart() {
   const { dataCart } = useSelector((state) => state.cart);
-  console.log(dataCart);
+  const user = useSelector((state) => state.auth.user);
+
+  const filteredDataCart = dataCart.filter((item) => item.userId === user.id);
+
   const dispatch = useDispatch();
 
-  const handleIncrement = async (id) => {
+  const handleIncrement = (id) => {
     const foundData = dataCart.find((item) => item.id === id);
-    console.log(foundData);
-    // foundData.qty += 1;
+
     const payload = {
       ...foundData,
-      qty: foundData.qty + 1
+      qty: foundData.qty + 1,
     };
-    await axios.put(`http://localhost:3000/cart/${id}`, payload).then((res) => {
+    axios.put(`http://localhost:3000/cart/${id}`, payload).then((res) => {
       dispatch(incrementQty(res.data.id));
     });
   };
 
-  const handleDecrement = async (id) => {
+  const handleDecrement = (id) => {
     const foundData = dataCart.find((item) => item.id === id);
-    // console.log(foundData);
-    // foundData.qty += 1;
+
     const payload = {
       ...foundData,
-      qty: foundData.qty - 1
+      qty: foundData.qty - 1,
     };
-    await axios.put(`http://localhost:3000/cart/${id}`, payload).then((res) => {
+    axios.put(`http://localhost:3000/cart/${id}`, payload).then((res) => {
       dispatch(decrementQty(res.data.id));
     });
   };
 
-  return (
-    <div>
-      <h2>Cart</h2>
-      <hr />
-      <div className="flex flex-col">
-        {dataCart.map((item) => (
-          <div className="flex justify-between my-4 bg-slate-300" key={item.id}>
-            <img src={item.img} alt="foto" className="w-16" />
+  const handleRemove = (id) => {
+    axios.delete(`http://localhost:3000/cart/${id}`).then(() => {
+      dispatch(removeItem(id));
+    });
+  };
 
-            <h3 className="font-bold">{item.name}</h3>
-            <div className="flex self-center justify-between gap-3">
-              <button
-                className={`${
-                  item.qty === 1 ? "bg-blue-300" : "bg-primary"
-                } h-full w-5 rounded text-sm text-white`}
-                disabled={item.qty === 1}
-                onClick={() => handleDecrement(item.id)}
-              >
-                -
-              </button>
-              <span className="text-gray-500 text-sm">{item.qty}</span>
-              <button
-                className="bg-primary h-full w-5 rounded text-sm text-white"
-                onClick={() => handleIncrement(item.id)}
-              >
-                +
-              </button>
-            </div>
-            <span>{toRupiah(item.price * item.qty)}</span>
-          </div>
+  return (
+    <div className="w-3/4 py-4 px-8">
+      <h2 className="text-center font-bold text-xl mb-4">Cart</h2>
+      <hr />
+      <div>
+        {filteredDataCart.map((item) => (
+          <CartItem
+            key={item.id}
+            name={item.name}
+            img={item.img}
+            price={item.price}
+            qty={item.qty}
+            handleDecrement={() => handleDecrement(item.id)}
+            handleIncrement={() => handleIncrement(item.id)}
+            handleRemove={() => handleRemove(item.id)}
+          />
         ))}
       </div>
 

@@ -11,11 +11,15 @@ const cartSlice = createSlice({
     addToCart(state, action) {
       const id = action.payload.pokemonId;
       const qty = action.payload.qty;
-      const existingItem = state.dataCart.find((item) => item.pokemonId === id);
+      const userId = action.payload.userId;
+
+      const existingItem = state.dataCart.find(
+        (item) => item.pokemonId === id && item.userId === userId
+      );
 
       if (existingItem) {
         state.dataCart.forEach((item) => {
-          if (item.pokemonId === id) {
+          if (item.pokemonId === id && item.userId === userId) {
             item.qty = qty;
           }
         });
@@ -41,8 +45,13 @@ const cartSlice = createSlice({
         }
       });
     },
+    removeItem: (state, action) => {
+      const id = action.payload;
+      state.dataCart = state.dataCart.filter((item) => item.id !== id);
+    },
   },
 });
 
-export const { addToCart, decrementQty, incrementQty } = cartSlice.actions;
+export const { addToCart, decrementQty, incrementQty, removeItem } =
+  cartSlice.actions;
 export default cartSlice.reducer;
