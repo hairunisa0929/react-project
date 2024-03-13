@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BiCartAlt } from "react-icons/bi";
 import Logo from "../assets/images/pokemon-logo.png";
 import { resetAuthData } from "../store/reducers/authSlice";
-import { addToCart } from "../store/reducers/cartSlice";
+import { getCart } from "../store/reducers/cartSlice";
 
 function Header() {
   const dispatch = useDispatch();
@@ -26,19 +26,11 @@ function Header() {
     navigate("/login");
   };
 
-  const fetchData = () => {
-    axios.get("http://localhost:3000/cart").then((res) => {
-      res.data.forEach((item) => {
-        dispatch(addToCart(item));
-      });
-    });
-  };
-
   useEffect(() => {
     if (isLoggedIn) {
-      fetchData();
+      dispatch(getCart());
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, dispatch]);
 
   return (
     <header

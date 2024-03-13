@@ -6,7 +6,7 @@ import { BeatLoader } from "react-spinners";
 import useSWR from "swr";
 import { checkoutBooking } from "../store/reducers/checkoutSlice";
 import { toRupiah } from "../utils/formatter";
-import { addToCart } from "../store/reducers/cartSlice";
+import { addToCart, updateCartQty } from "../store/reducers/cartSlice";
 
 const fetcher = (url) => axios.get(url).then((response) => response.data);
 
@@ -48,18 +48,15 @@ function Detail() {
     const foundItem = dataCart.find(
       (item) => item.pokemonId === parseInt(id) && item.userId === user.id
     );
-    // console.log(dataCart);
+
     if (foundItem) {
       console.log("masuk edit");
       const payload = {
         ...foundItem,
         qty: foundItem.qty + qty,
       };
-      axios
-        .put(`http://localhost:3000/cart/${foundItem.id}`, payload)
-        .then((res) => {
-          dispatch(addToCart(res.data));
-        });
+
+      dispatch(updateCartQty(payload));
     } else {
       console.log("masuk add");
       const payload = {
@@ -70,9 +67,8 @@ function Detail() {
         price: data.price,
         qty,
       };
-      axios.post("http://localhost:3000/cart", payload).then((res) => {
-        dispatch(addToCart(res.data));
-      });
+
+      dispatch(addToCart(payload));
     }
 
     // navigate("/cart");

@@ -1,14 +1,72 @@
-import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   dataCart: [],
+  isLoading: false,
+  error: null,
 };
+
+export const getCart = createAsyncThunk("cart/getCart", () => {
+  const result = axios
+    .get("http://localhost:3000/cart")
+    .then((res) => res.data);
+
+  return result;
+});
+
+export const addToCart = createAsyncThunk("cart/addToCart", (payload) => {
+  const result = axios
+    .post("http://localhost:3000/cart", payload)
+    .then((res) => res.data);
+
+  return result;
+});
+
+export const updateCartQty = createAsyncThunk(
+  "cart/updateCartQty",
+  (payload) => {
+    const result = axios
+      .put(`http://localhost:3000/cart/${payload.id}`, payload)
+      .then((res) => res.data);
+
+    return result;
+  }
+);
+
+export const removeCartItem = createAsyncThunk(
+  "cart/removeCartItem",
+  async (id) => {
+    await axios.delete(`http://localhost:3000/cart/${id}`);
+    console.log(id);
+    return id;
+  }
+);
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: { ...initialState },
-  reducers: {
-    addToCart(state, action) {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getCart.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getCart.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.isLoading = false;
+      state.dataCart = action.payload;
+    });
+    builder.addCase(getCart.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(addToCart.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.dataCart.push({ ...action.payload });
+    });
+    builder.addCase(updateCartQty.fulfilled, (state, action) => {
+      state.isLoading = false;
+
       const id = action.payload.pokemonId;
       const qty = action.payload.qty;
       const userId = action.payload.userId;
@@ -23,35 +81,14 @@ const cartSlice = createSlice({
             item.qty = qty;
           }
         });
-      } else {
-        state.dataCart.push({ ...action.payload });
       }
-    },
-    incrementQty: (state, action) => {
-      const id = action.payload;
-
-      state.dataCart.forEach((item) => {
-        if (item.id === id) {
-          item.qty += 1;
-        }
-      });
-    },
-    decrementQty: (state, action) => {
-      const id = action.payload;
-
-      state.dataCart.forEach((item) => {
-        if (item.id === id) {
-          item.qty -= 1;
-        }
-      });
-    },
-    removeItem: (state, action) => {
-      const id = action.payload;
-      state.dataCart = state.dataCart.filter((item) => item.id !== id);
-    },
+    });
+    builder.addCase(removeCartItem.fulfilled, (state, action) => {
+      state.dataCart = state.dataCart.filter(
+        (item) => item.id !== action.payload
+      );
+    });
   },
 });
 
-export const { addToCart, decrementQty, incrementQty, removeItem } =
-  cartSlice.actions;
 export default cartSlice.reducer;

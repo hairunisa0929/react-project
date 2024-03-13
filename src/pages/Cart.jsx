@@ -1,12 +1,5 @@
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { TiTrash } from "react-icons/ti";
-import { toRupiah } from "../utils/formatter";
-import {
-  decrementQty,
-  incrementQty,
-  removeItem,
-} from "../store/reducers/cartSlice";
+import { removeCartItem, updateCartQty } from "../store/reducers/cartSlice";
 import CartItem from "../components/CartItem";
 
 function Cart() {
@@ -24,9 +17,8 @@ function Cart() {
       ...foundData,
       qty: foundData.qty + 1,
     };
-    axios.put(`http://localhost:3000/cart/${id}`, payload).then((res) => {
-      dispatch(incrementQty(res.data.id));
-    });
+
+    dispatch(updateCartQty(payload));
   };
 
   const handleDecrement = (id) => {
@@ -36,15 +28,12 @@ function Cart() {
       ...foundData,
       qty: foundData.qty - 1,
     };
-    axios.put(`http://localhost:3000/cart/${id}`, payload).then((res) => {
-      dispatch(decrementQty(res.data.id));
-    });
+
+    dispatch(updateCartQty(payload));
   };
 
   const handleRemove = (id) => {
-    axios.delete(`http://localhost:3000/cart/${id}`).then(() => {
-      dispatch(removeItem(id));
-    });
+    dispatch(removeCartItem(id));
   };
 
   return (

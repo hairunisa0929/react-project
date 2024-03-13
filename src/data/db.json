@@ -69,42 +69,5 @@
       "id": 3
     }
   ],
-  "cart": [
-    {
-      "userId": 3,
-      "pokemonId": 3,
-      "name": "Poliwag",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/060.png",
-      "price": 100000,
-      "qty": 4,
-      "id": 2
-    },
-    {
-      "userId": 3,
-      "pokemonId": 4,
-      "name": "Onix",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/095.png",
-      "price": 110000,
-      "qty": 5,
-      "id": 3
-    },
-    {
-      "userId": 2,
-      "pokemonId": 3,
-      "name": "Poliwag",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/060.png",
-      "price": 100000,
-      "qty": 2,
-      "id": 6
-    },
-    {
-      "userId": 2,
-      "pokemonId": 1,
-      "name": "Charmander",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png",
-      "price": 120000,
-      "qty": 3,
-      "id": 8
-    }
-  ]
+  "cart": []
 }
