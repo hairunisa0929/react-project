@@ -38,7 +38,6 @@ export const removeCartItem = createAsyncThunk(
   "cart/removeCartItem",
   async (id) => {
     await axios.delete(`http://localhost:3000/cart/${id}`);
-    console.log(id);
     return id;
   }
 );
@@ -52,7 +51,6 @@ const cartSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getCart.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.isLoading = false;
       state.dataCart = action.payload;
     });

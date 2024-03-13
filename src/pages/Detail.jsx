@@ -50,7 +50,6 @@ function Detail() {
     );
 
     if (foundItem) {
-      console.log("masuk edit");
       const payload = {
         ...foundItem,
         qty: foundItem.qty + qty,
@@ -58,7 +57,6 @@ function Detail() {
 
       dispatch(updateCartQty(payload));
     } else {
-      console.log("masuk add");
       const payload = {
         userId: user.id,
         pokemonId: data.id,
